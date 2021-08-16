@@ -2,4 +2,5 @@ Data Peserta SanberCode Bootcamp Vue JS
 1. Nama: Panji Ahmad Nurhusni
 2. Email: apanji6399@gmail.com
 3. Akun Github: @nurhusni
-4. Akun Telegram: @thenurhusni
+4. Akun Gitlab: @panjiahnh
+5. Akun Telegram: @thenurhusni
