@@ -1,0 +1,4 @@
+Pengalaman Programming
+- Asistensi laboratorium perkuliahan menggunakan Matlab.
+- Magang di instansi pemerintah menggunakan Python.
+- Pernah mengerjakan proyek komunitas menggunakan TypeScript dan React Native.
