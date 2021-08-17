@@ -1,0 +1,104 @@
+body {
+  align-items: center;
+  justify-content: center;
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  background-color: #000;
+  color: #fff;
+}
+
+h1 {
+  font-weight: 800;
+  margin-left: 4rem;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+p,
+tr {
+  font-family: "Nunito", sans-serif;
+}
+
+tr {
+  vertical-align: top;
+}
+
+table {
+  margin-left: 2rem;
+}
+
+.contact-link {
+  color: #fff;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  color: aqua;
+}
+
+.container {
+  padding: 2rem 16rem;
+}
+
+.container-contact {
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+}
+
+.container-details {
+}
+
+.container-footer {
+  padding: 2rem 16rem;
+  text-align: center;
+}
+
+.details-timeline {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  text-align: justify;
+  color: #808080;
+}
+
+.details-education {
+  margin: 0;
+}
+
+.summary {
+  text-align: center;
+  color: #808080;
+  margin: 2rem 8rem;
+}
+
+.table-info-key {
+  font-weight: 700;
+  padding-right: 2rem;
+}
+
+.table-info-value {
+  color: #808080;
+}
+
+.table-year {
+  color: #808080;
+}
+
+#bio-photo {
+  width: 16%;
+  height: 16%;
+  border-radius: 4rem;
+}
