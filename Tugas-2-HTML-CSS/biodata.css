@@ -11,6 +11,11 @@ header {
   align-items: center;
 }
 
+main {
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
 footer {
   background-color: #000;
   color: #fff;
@@ -59,29 +64,29 @@ table {
   justify-content: space-around;
 }
 
-.container-details {
-}
-
 .container-footer {
   padding: 2rem 16rem;
   text-align: center;
 }
 
-.details-timeline {
-  margin-left: 2rem;
-  margin-right: 2rem;
-  text-align: justify;
+.details {
+  margin: 0;
+}
+
+.details-sub {
   color: #808080;
 }
 
-.details-education {
-  margin: 0;
+.details-year {
+  color: #808080;
+  text-align: right;
+  padding-right: 2rem;
 }
 
 .summary {
   text-align: center;
   color: #808080;
-  margin: 2rem 8rem;
+  margin: 2rem 0;
 }
 
 .table-info-key {
@@ -90,10 +95,6 @@ table {
 }
 
 .table-info-value {
-  color: #808080;
-}
-
-.table-year {
   color: #808080;
 }
 
