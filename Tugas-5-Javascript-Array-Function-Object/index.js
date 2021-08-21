@@ -17,16 +17,16 @@ console.log("\n");
 
 console.log("Soal 2");
 
-function introduce(data) {
+function introduce(identitas) {
   console.log(
     "Nama saya " +
-      data.name +
+      identitas.name +
       ", umur saya " +
-      data.age +
+      identitas.age +
       " tahun, alamat saya di " +
-      data.address +
+      identitas.address +
       ", dan saya punya hobby yaitu " +
-      data.hobby
+      identitas.hobby
   );
 }
 
@@ -39,20 +39,20 @@ console.log("\n");
 
 console.log("Soal 3");
 
-function hitung_huruf_vokal(data) {
+function hitung_huruf_vokal(kalimat) {
   var count = 0;
   var arrVokal = ["a", "i", "u", "e", "o"];
 
-  data
-    .toLowerCase()
-    .split("")
-    .forEach(function (itemData) {
-      arrVokal.forEach(function (itemVokal) {
-        if (itemData == itemVokal) {
-          count++;
-        }
-      });
-    });
+  var hurufKalimat = kalimat.toLowerCase().split("");
+
+  for (var huruf of hurufKalimat) {
+    for (var vokal of arrVokal) {
+      if (huruf == vokal) {
+        count++;
+        break;
+      }
+    }
+  }
 
   return count;
 }
