@@ -41,23 +41,26 @@
                 <input type=" button" value="CANCEL" @click="clearForm"><br>
             </div>
         </form>
+
         <br>
-        <table border="1">
-            <tr>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Nomor HP</th>
-                <th>Foto Profil</th>
-                <th>Aksi</th>
-            </tr>
+
+        <member-component>
+
+        </member-component>
+
+        <table>
             <tr v-for="member in members">
-                <td>{{ member.name }}</td>
-                <td>{{ member.address }}</td>
-                <td>{{ member.no_hp }}</td>
                 <td><img width=100
                         :src="member.photo_profile ? photoDomain + member.photo_profile : 'https://dummyimage.com/600x400/000/ffffff&text=Foto+Profil'"
                         alt="Foto Profil">
                 </td>
+                <td>
+                    <b>Name : </b> {{ member.name }} <br>
+                    <b>Address : </b> {{ member.address }} <br>
+                    <b>Phone Number : </b> {{ member.no_hp }}
+
+                </td>
+
                 <td>
                     <button @click="editMember(member)">Edit</button>
                     <button @click="removeMember(member.id)">Delete</button>
@@ -70,8 +73,17 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        new Vue({
+        var MemberComponent = {
+            template: `
+
+            `
+        }
+
+        var vm = new Vue({
             el: '#app',
+            components: {
+                "member_component": MemberComponent
+            },
             data: {
                 name: '',
                 address: '',
