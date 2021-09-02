@@ -47,10 +47,18 @@
 
         <table>
             <tr v-for="member in members">
-                <member-component :member="member" :photo_domain="photo_domain"></member-component>
+                <td>
+                    <img width=100
+                        :src="member.photo_profile ? photo_domain + member.photo_profile : 'https://dummyimage.com/600x400/000/ffffff&text=Foto+Profil'"
+                        alt="Foto Profil">
+                </td>
 
                 <td>
-                    <button-component @edit-member="editMember" @remove-member="removeMember"
+                    <member-component :member="member"></member-component>
+                </td>
+
+                <td>
+                    <button-component :member="member" @edit-member="editMember" @remove-member="removeMember"
                         @upload-photo="uploadPhoto">
                     </button-component>
                 </td>
@@ -63,26 +71,17 @@
     <script>
         var MemberComponent = {
             template: `
-            <td>
-                <img width=100
-                    :src="member.photo_profile ? photo_domain + member.photo_profile : 'https://dummyimage.com/600x400/000/ffffff&text=Foto+Profil'"
-                    alt="Foto Profil">
-            </td>
-            <td>
-                <b>Name : </b> {{ member.name }} <br>
-                <b>Address : </b> {{ member.address }} <br>
-                <b>Phone Number : </b> {{ member.no_hp }}
-            </td>
-            `,
-            props: ['member', 'photo_domain']
+            <b>Name: </b> {{ member.name }} <br>
+            <b>Address: </b> {{ member.address }} <br>
+            <b>Phone Number: </b> {{ member.no_hp }} <br>`,
+            props: ['member']
         }
 
         var ButtonComponent = {
             template: `
             <button @click="$emit('edit-member', member)">Edit</button>
             <button @click="$emit('remove-member', member.id)">Delete</button>
-            <button @click="$emit('upload-photo', member)">Upload Photo</button>
-            `
+            <button @click="$emit('upload-photo', member)">Upload Photo</button>`
         }
 
         var vm = new Vue({
