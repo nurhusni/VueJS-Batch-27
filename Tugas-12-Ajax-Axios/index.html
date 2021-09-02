@@ -17,13 +17,16 @@
                 <li v-for="error in errors">{{error}}</li>
             </ul>
             </p>
-            <label>Nama: </label>
-            <input type="text" name="name" ref="name" :disabled="buttonStatus == 'upload'" v-model="name">
-            <label>Alamat: </label>
-            <textarea name="address" ref="address" :disabled="buttonStatus == 'upload'" v-model="address"></textarea>
-            <label>Nomor HP: </label>
-            <input type="text" name="phone_number" ref="phone_number" :disabled="buttonStatus == 'upload'"
-                v-model="phone_number">
+
+            <label>Nama: </label><br>
+            <input type="text" name="name" ref="name" :disabled="buttonStatus == 'upload'" v-model="name"><br>
+
+            <label>Alamat</label><br>
+            <textarea name="address" ref="address" :disabled="buttonStatus == 'upload'"
+                v-model="address"></textarea><br>
+
+            <label>Nomor HP</label><br>
+            <input type="text" name="no_hp" ref="no_hp" :disabled="buttonStatus == 'upload'" v-model="no_hp"><br>
 
             <div v-if="buttonStatus == 'submit'">
                 <input type="submit" value="SUBMIT"><br>
@@ -37,22 +40,23 @@
                 <input type=" button" value="UPLOAD" @click="submitPhoto(idUploadMember)">
                 <input type=" button" value="CANCEL" @click="clearForm"><br>
             </div>
-
         </form>
-
-        <br><br>
-
-        <table borders=1>
-            <tr v-for=" member in members">
-                <td>
-                    <img width=100
-                        :src="member.photo_profile ? photoDomain + member.photo_profile : 'https://dummyimage.com/600x400/000/ffffff&text=Isi+Data'"
+        <br>
+        <table border="1">
+            <tr>
+                <th>Nama</th>
+                <th>Alamat</th>
+                <th>Nomor HP</th>
+                <th>Foto Profil</th>
+                <th>Aksi</th>
+            </tr>
+            <tr v-for="member in members">
+                <td>{{ member.name }}</td>
+                <td>{{ member.address }}</td>
+                <td>{{ member.no_hp }}</td>
+                <td><img width=100
+                        :src="member.photo_profile ? photoDomain + member.photo_profile : 'https://dummyimage.com/600x400/000/ffffff&text=Foto+Profil'"
                         alt="Foto Profil">
-                </td>
-                <td>
-                    <b>Nama : </b> {{member.name}} <br>
-                    <b>Alamat : </b> {{member.address}} <br>
-                    <b>Nomo HP : </b> {{member.phone_number}} <br>
                 </td>
                 <td>
                     <button @click="editMember(member)">Edit</button>
@@ -66,21 +70,20 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        var vm = new Vue({
+        new Vue({
             el: '#app',
-
             data: {
                 name: '',
                 address: '',
-                phone_number: '',
-                errors: [],
+                no_hp: '',
                 members: [],
+                errors: [],
                 photoDomain: "http://demo-api-vue.sanbercloud.com/",
                 buttonStatus: 'submit',
                 idEditMember: null,
-                idUploadPhoto: null
-            },
+                idUploadMember: null
 
+            },
             methods: {
                 validation: function () {
                     this.errors = []
@@ -95,16 +98,16 @@
                         this.$refs.address.focus()
                     }
 
-                    if (this.phone_number.length > 15) {
+                    if (this.no_hp.length > 15) {
                         this.errors.push('Nomor handphone tidak boleh lebih dari 15 karakter')
-                        this.$refs.phone_number.focus()
+                        this.$refs.no_hp.focus()
                     }
                 },
 
                 clearform: function () {
                     this.name = ''
                     this.address = ''
-                    this.phone_number = ''
+                    this.no_hp = ''
                     this.buttonStatus = 'submit'
                     this.idEditMember = null
                     this.idUploadMember = null
@@ -114,45 +117,44 @@
                     this.validationForm()
 
                     if (this.errors.length === 0) {
-                        let formData = new FormData();
-                        formData.append('nama', this.title);
-                        formData.append('address', this.address);
-                        formData.append('phone_number', this.phone_number);
+                        let formData = new FormData()
+                        formData.append('name', this.name)
+                        formData.append('address', this.address)
+                        formData.append('no_hp', this.no_hp)
 
                         const config = {
-                            method: 'post',
-                            url: 'http://demo-api-vue.sanbercloud.com/api/member',
+                            method: "post",
+                            url: "http://demo-api-vue.sanbercloud.com/api/member",
                             data: formData
-                        };
+                        }
 
                         axios(config)
                             .then((response) => {
-                                this.clearform();
-                                this.getMembers();
-                                alert(response.data.message);
+                                this.clearform()
+                                this.getMembers()
+                                alert(response.data.message)
                             })
                             .catch((error) => {
                                 console.log(error);
-                            });
-                        alert('Terima kasih Anda telah mengisi dengan benar')
+                            })
+                        alert("Terima kasih Anda telah mengisi dengan benar")
                     }
                 },
 
                 getMembers: function () {
                     const config = {
-                        method: 'get',
-                        url: 'http://demo-api-vue.sanbercloud.com/api/member',
-                    };
+                        method: "get",
+                        url: "http://demo-api-vue.sanbercloud.com/api/member"
+                    }
 
                     axios(config)
                         .then((response) => {
                             this.members = response.data.members
-
-                            console.log(this.members);
+                            console.log(this.members)
                         })
-                        .catch((error) => {
-                            console.log(error);
-                        });
+                        .catch((response) => {
+                            console.log(error)
+                        })
                 },
 
                 removeMember: function (id) {
@@ -161,12 +163,13 @@
                         url: `http://demo-api-vue.sanbercloud.com/api/member/${id}`,
                         params: { _method: "DELETE" }
                     }
+
                     axios(config)
                         .then((response) => {
                             this.getMembers()
                             alert(response.data.message)
                         })
-                        .catch((response) => {
+                        .catch((error) => {
                             console.log(error)
                         })
 
@@ -176,7 +179,7 @@
                 editMember: function (member) {
                     this.name = member.name
                     this.address = member.address
-                    this.phone_number = member.phone_number
+                    this.no_hp = member.no_hp
                     this.buttonStatus = 'update'
                     this.idEditMember = member.id
                 },
@@ -185,7 +188,7 @@
                     let formData = new FormData()
                     formData.append('name', this.name)
                     formData.append('address', this.address)
-                    formData.append('phone_number', this.phone_number)
+                    formData.append('no_hp', this.no_hp)
 
                     const config = {
                         method: "post",
@@ -201,7 +204,7 @@
 
                             alert(response.data.message)
                         })
-                        .catch(() => {
+                        .catch((error) => {
                             console.log(error)
                         })
                 },
@@ -209,7 +212,7 @@
                 uploadPhoto: function (member) {
                     this.name = member.name
                     this.address = member.address
-                    this.phone_number = member.phone_number
+                    this.no_hp = member.no_hp
                     this.buttonStatus = 'upload'
                     this.idUploadMember = member.id
                 },
@@ -236,11 +239,10 @@
                         .catch((error) => {
                             console.log(error)
                         })
-                },
-
-                created: function () {
-                    this.getMembers()
                 }
+            },
+            created: function () {
+                this.getMembers()
             }
         })
     </script>
