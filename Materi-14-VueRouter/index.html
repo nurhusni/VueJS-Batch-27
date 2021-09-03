@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Belajar Vue Router</h1>
+
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+        <router-link to="/categories">Categories</router-link>
+
+        <hr>
+        <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+    <script type="module">
+        import { CategoriesComponent } from './CategoriesComponent.js'
+        import { CategoryComponent } from './CategoryComponent.js'
+
+        const Home = { template: '<div>Ini halaman home</div>' }
+        const About = { template: '<div>Ini halaman about</div>' }
+
+        const routes = [
+            { path: '/', component: Home, alias: '/home' },
+            { path: '/about', component: About },
+            { path: '/categories', component: CategoriesComponent },
+            { path: '/category/:id', component: CategoryComponent },
+            { path: '*', redirect: '/' }
+        ]
+
+        const router = new VueRouter({
+            routes
+        })
+
+        new Vue({
+            el: "#app",
+            router
+        })
+    </script>
+</body>
+
+</html>
